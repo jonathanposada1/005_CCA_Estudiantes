@@ -1,0 +1,2 @@
+Para la entrega del parcial se presentan dos notebooks correspondientes al punto 3 y 4,
+adicionalmente, un pdf con las soluciones teóricas de los puntos 1 al 4

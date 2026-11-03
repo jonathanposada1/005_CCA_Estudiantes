@@ -1,0 +1,1 @@
+En esta carpeta se encuentra el .ipynb con la solución del reto y el pdf que fue compartido para el desarrollo del mismo.
