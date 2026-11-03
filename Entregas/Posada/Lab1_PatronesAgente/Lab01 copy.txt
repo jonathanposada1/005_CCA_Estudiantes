@@ -1,0 +1,2 @@
+
+# Crear un informe de como funciona y las ventajas de cada unos de los patrones de diseno
