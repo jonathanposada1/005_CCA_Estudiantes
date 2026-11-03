@@ -1,0 +1,71 @@
+
+2. Verificar que Ollama esté corriendo en tu equipo
+
+curl http://localhost:11434/api/tags
+
+
+
+3. Configurar variables de entorno
+LLM_MODEL=ollama:qwen3:4b-instruct
+OLLAMA_API_URL=http://127.0.0.1:11434
+OLLAMA_TIMEOUT=300
+TAVILY_API_KEY=your-tavily-api-key   # pon tu key real aquí
+
+docker build -t agentic-ai-v2 .
+docker rm -f fpsvc-v2 2>/dev/null
+
+
+docker run --rm -it --network host --env-file .env --name fpsvc-v2 agentic-ai-v2
+
+
+docker stop fpsvc-v2
+--------------------------
+
+
+
+docker run --rm -it \
+  -p 8000:8000 -p 5432:5432 \
+  --env-file .env \
+  --name fpsvc-v2 \
+  agentic-ai-v2
+Y en tu .env, cambia la URL de Ollama para que apunte al host desde dentro del contenedor:
+
+
+OLLAMA_API_URL=http://host.docker.internal:11434
+
+# prueba
+---------------------------------=
+
+
+Windows
+
+
+PowerShell:
+
+
+docker rm -f fpsvc-v2 2>$null
+
+docker run --rm -it `
+  -p 8000:8000 -p 5432:5432 `
+  --env-file .env `
+  --name fpsvc-v2 `
+  agentic-ai-v2
+CMD (una sola línea):
+
+
+docker rm -f fpsvc-v2
+docker run --rm -it -p 8000:8000 -p 5432:5432 --env-file .env --name fpsvc-v2 agentic-ai-v2
+En .env, igual que en Mac:
+
+
+OLLAMA_API_URL=http://host.docker.internal:11434
+(host.docker.internal también lo resuelve Docker Desktop automáticamente en Windows).
+
+Para que Ollama escuche en todas las interfaces, en Windows se hace con una variable de entorno del sistema:
+
+
+setx OLLAMA_HOST "0.0.0.0"
+Luego cierra Ollama desde el ícono de la bandeja del sistema y vuelve a abrirlo para que tome la variable nueva. La app quedará igual en http://localhost:8000.
+
+
+

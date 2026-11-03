@@ -1,0 +1,102 @@
+AYUDA - Como ejecutar physics_agent_lab.ipynb
+================================================
+
+Carpeta del proyecto:
+
+
+Este notebook ya quedo configurado (entorno virtual, kernel de Jupyter,
+dependencias y datos de ejemplo). Para volver a correrlo, sigue estos pasos.
+
+
+1. Confirma que Ollama este corriendo
+--------------------------------------
+Ollama es el programa que corre el modelo de IA en tu computador (local,
+sin internet ni API key). Si no esta abierto, abre la app de Ollama, o
+desde una terminal corre:
+
+    ollama serve
+
+Puedes verificar que este activo con:
+
+    curl http://localhost:11434/api/version
+
+Si responde con un numero de version, esta funcionando.
+
+
+2. Abre el notebook
+--------------------
+Opcion A - Desde VS Code:
+  Abre la carpeta del proyecto y haz doble clic en physics_agent_lab.ipynb
+
+Opcion B - Desde una terminal con Jupyter:
+    .venv/bin/jupyter notebook physics_agent_lab.ipynb
+
+
+3. Selecciona el kernel correcto
+----------------------------------
+Arriba a la derecha del notebook, elige el kernel:
+
+    Python (physics-agent-lab)
+
+Ya esta registrado, no hay que instalarlo de nuevo. Si en VS Code no
+aparece a la primera, dale a "Select Kernel" -> "Jupyter Kernel" y busca
+"physics-agent-lab".
+
+Ojo: el kernel guarda la ruta absoluta de esta carpeta. Si mueves o
+renombras la carpeta del proyecto, el kernel se rompe (aparece como
+invalido o no conecta). Para arreglarlo corre de nuevo "python3 run.py"
+(o el comando de "Selecciona el kernel correcto" de arriba) desde la
+carpeta en su nueva ubicacion. Alternativa que nunca se rompe: en VS
+Code, en "Select Kernel" elige "Python Environments" -> el interprete
+de ".venv" directamente, en vez del kernel registrado por nombre.
+
+
+4. Corre las celdas en orden
+-------------------------------
+De arriba hacia abajo, con Shift+Enter en cada celda. No hace falta tocar
+nada mas: los datasets (data/resorte.csv, data/decaimiento.csv,
+data/pendulo.csv) ya estan generados.
+
+
+5. Que vas a ver
+------------------
+- Secciones 1 a 5: introduccion, carga de datos, prueba de las
+  herramientas a mano (sin usar el LLM todavia).
+- Seccion 6: el agente recibe una instruccion en lenguaje natural (por
+  ejemplo "ajusta un modelo lineal a los datos del resorte...") y decide
+  el solo que funcion de Python llamar para resolverla.
+- Al final de la seccion 6.4 deberia aparecer una grafica del ajuste del
+  pendulo.
+- Seccion 6.5 explica que el modelo usado (llama3.2:1b) es pequeno y a
+  veces se equivoca eligiendo la herramienta o explicando el resultado.
+  Ahi mismo se muestra como cambiar a un modelo mas grande (qwen3:1.7b,
+  ya lo tienes descargado) sin tocar el resto del codigo.
+
+
+Regenerar los datos de ejemplo (opcional)
+--------------------------------------------
+Si quieres volver a generar los datasets desde cero (por ejemplo con otro
+ruido aleatorio), corre en una terminal:
+
+    .venv/bin/python data/make_datasets.py
+
+
+Ejecutar esto en otra maquina
+--------------------------------
+Copia la carpeta del proyecto (o clonala) a la otra maquina, instala
+Ollama (https://ollama.com) si no lo tiene, y desde una terminal parado
+en esa carpeta corre:
+
+    python3 run.py
+
+Este script crea el entorno virtual, instala las dependencias, registra
+el kernel de Jupyter, genera los datasets si faltan, descarga el modelo
+de Ollama si falta, y abre el notebook. No hace falta ningun .env ni
+API key. Puedes volver a correrlo cuantas veces quieras, no rehace lo
+que ya esta listo.
+
+
+Mas detalle
+-------------
+Para entender cada paso por separado, ver README.md en esta misma
+carpeta.
