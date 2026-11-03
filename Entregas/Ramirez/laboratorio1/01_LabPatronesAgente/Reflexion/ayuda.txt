@@ -1,0 +1,90 @@
+AYUDA - Como ejecutar reflexion_agent_lab.ipynb
+==================================================
+
+Carpeta del proyecto:
+/Users/neuman/Documents/UdeA/01_Docencia/Cursos/Maestria/ComputacionCientifica/005_CCA_Instructor/AgentAICourse/PatronesAgente/Reflexion
+
+
+1. Confirma que Ollama este corriendo
+--------------------------------------
+Ollama es el programa que corre el modelo de IA en tu computador (local,
+sin internet ni API key). Si no esta abierto, abre la app de Ollama, o
+desde una terminal corre:
+
+    ollama serve
+
+Puedes verificar que este activo con:
+
+    curl http://localhost:11434/api/version
+
+Si responde con un numero de version, esta funcionando.
+
+
+2. Primera vez / dejar todo listo
+------------------------------------
+Desde una terminal, parado en esta carpeta:
+
+    python3 run.py
+
+Este script crea el entorno virtual, instala dependencias, registra el
+kernel de Jupyter, descarga el modelo por defecto (llama3.2:1b) si
+falta, y abre el notebook. Puedes correrlo de nuevo cuantas veces
+quieras, no rehace lo que ya esta listo. No hace falta ningun .env ni
+API key.
+
+
+3. Abre el notebook
+--------------------
+Si no lo abrio "run.py" por ti:
+
+Opcion A - Desde VS Code:
+  Abre la carpeta del proyecto y haz doble clic en reflexion_agent_lab.ipynb
+
+Opcion B - Desde una terminal con Jupyter:
+    cd "/Users/neuman/Documents/UdeA/01_Docencia/Cursos/Maestria/ComputacionCientifica/005_CCA_Instructor/AgentAICourse/PatronesAgente/Reflexion"
+    .venv/bin/jupyter notebook reflexion_agent_lab.ipynb
+
+
+4. Selecciona el kernel correcto
+----------------------------------
+Arriba a la derecha del notebook, elige el kernel:
+
+    Python (reflexion-lab)
+
+Ojo: el kernel guarda la ruta absoluta de esta carpeta. Si mueves o
+renombras la carpeta del proyecto, el kernel se rompe. Para arreglarlo
+corre de nuevo "python3 run.py" desde la carpeta en su nueva ubicacion.
+Alternativa que nunca se rompe: en VS Code, en "Select Kernel" elige
+"Python Environments" -> el interprete de ".venv" directamente, en vez
+del kernel registrado por nombre.
+
+
+5. Corre las celdas en orden
+-------------------------------
+De arriba hacia abajo, con Shift+Enter en cada celda.
+
+
+6. Que vas a ver
+------------------
+- Seccion 1: una explicacion generada una sola vez, sin revision (linea
+  base) -- con el modelo pequeno a veces tiene errores.
+- Secciones 2 a 3: el ciclo generar -> criticar -> revisar, primero a
+  mano y despues encadenado en `run_reflection`.
+- Seccion 4: el mismo ciclo sobre varios conceptos.
+- Seccion 5: comparacion con un modelo mas grande (qwen3:1.7b, ya lo
+  tienes descargado si seguiste el lab de Tools) cambiando solo el
+  parametro `model`.
+
+
+Ejecutar esto en otra maquina
+--------------------------------
+Copia la carpeta del proyecto (o clonala) a la otra maquina, instala
+Ollama (https://ollama.com) si no lo tiene, y desde una terminal parado
+en esa carpeta corre:
+
+    python3 run.py
+
+
+Mas detalle
+-------------
+Ver README.md en esta misma carpeta.
